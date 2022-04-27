@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finance_tracker/domain/core/errors.dart';
 import 'package:finance_tracker/domain/core/failures.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 @immutable
 abstract class ValueObject<T> extends Equatable {
@@ -24,4 +25,18 @@ abstract class ValueObject<T> extends Equatable {
         (f) => left(f),
         (_) => right(unit),
       );
+}
+
+class UniqueId extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory UniqueId() {
+    return UniqueId._(right(const Uuid().v1()));
+  }
+  const UniqueId._(this.value);
+
+  factory UniqueId.fromUniqueString(String uniqueId) {
+    return UniqueId._(right(uniqueId));
+  }
 }
