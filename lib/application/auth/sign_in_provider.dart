@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:finance_tracker/application/auth/sign_in_state.dart';
 import 'package:finance_tracker/domain/auth/agent.dart';
+import 'package:finance_tracker/domain/auth/auth_failure.dart';
 import 'package:finance_tracker/domain/auth/i_authenticator.dart';
 import 'package:finance_tracker/domain/auth/value_objects.dart';
 import 'package:finance_tracker/infrastructure/auth/firebase_authenticator.dart';
@@ -9,7 +10,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInNotifier extends StateNotifier<SignInState> {
-  SignInNotifier() : super(SignInState.initial());
+  final IAuthenticator _authenticator;
+
+  SignInNotifier(this._authenticator) : super(SignInState.initial());
 
   void emailChanged(String emailString) {
     state = state.copyWith(
@@ -26,15 +29,53 @@ class SignInNotifier extends StateNotifier<SignInState> {
   }
 
   void signUpWithEmail() {
-    state = SignInState.initial();
+    _performAuthAction(_authenticator.signUpWithEmail);
   }
 
   void signInWithEmail() {
-    state = SignInState.initial();
+    _performAuthAction(_authenticator.signInWithEmail);
   }
 
-  void signInWithGoogle() {
-    state = SignInState.initial();
+  Future<void> signInWithGoogle() async {
+    state = state.copyWith(
+      isSubmitting: true,
+      authResponseOption: none(),
+    );
+
+    final authResponse = await _authenticator.signInWithGoogle();
+
+    state = state.copyWith(
+      isSubmitting: false,
+      authResponseOption: some(authResponse),
+    );
+  }
+
+  Future<void> _performAuthAction(
+    Future<Either<AuthFailure, Unit>> Function({
+      required Email email,
+      required Password password,
+    })
+        authAction,
+  ) async {
+    Either<AuthFailure, Unit>? authResponse;
+
+    if (state.email.isValid() && state.password.isValid()) {
+      state = state.copyWith(
+        isSubmitting: true,
+        authResponseOption: none(),
+      );
+
+      authResponse = await authAction(
+        email: state.email,
+        password: state.password,
+      );
+    }
+
+    state = state.copyWith(
+      isSubmitting: false,
+      showErrorMessages: true,
+      authResponseOption: optionOf(authResponse),
+    );
   }
 }
 
@@ -45,3 +86,9 @@ final authenticatorProvider = Provider<IAuthenticator>((ref) {
 final authStateProvider = FutureProvider<Option<Agent>>((ref) {
   return ref.read(authenticatorProvider).getSignedInAgent();
 });
+
+final signInStateProvider = StateNotifierProvider<SignInNotifier, SignInState>(
+  (ref) {
+    return SignInNotifier(ref.read(authenticatorProvider));
+  },
+);
