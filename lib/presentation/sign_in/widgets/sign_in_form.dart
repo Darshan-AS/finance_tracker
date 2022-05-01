@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:finance_tracker/application/auth/sign_in_provider.dart';
-import 'package:finance_tracker/application/auth/sign_in_state.dart';
+import 'package:finance_tracker/application/auth/sign_in_form/sign_in_form_state.dart';
+import 'package:finance_tracker/application/auth/sign_in_form/sign_in_provider.dart';
 import 'package:finance_tracker/domain/auth/auth_failure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,9 +10,9 @@ class SignInForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final signInState = ref.watch(signInStateProvider);
+    final signInFormState = ref.watch(signInFormStateProvider);
 
-    ref.listen<SignInState>(signInStateProvider, (prevState, state) {
+    ref.listen<SignInFormState>(signInFormStateProvider, (prevState, state) {
       state.authResponseOption.fold(
         () => null,
         (authResponse) => _showAuthResponseSnackBar(context, authResponse),
@@ -20,7 +20,7 @@ class SignInForm extends ConsumerWidget {
     });
 
     return Form(
-      autovalidateMode: signInState.showErrorMessages
+      autovalidateMode: signInFormState.showErrorMessages
           ? AutovalidateMode.always
           : AutovalidateMode.disabled,
       child: ListView(
@@ -40,8 +40,8 @@ class SignInForm extends ConsumerWidget {
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             onChanged: (value) =>
-                ref.read(signInStateProvider.notifier).emailChanged(value),
-            validator: (_) => signInState.email.value.fold(
+                ref.read(signInFormStateProvider.notifier).emailChanged(value),
+            validator: (_) => signInFormState.email.value.fold(
               (f) => f.maybeMap(
                 invalidEmail: (_) => 'Invalid Email',
                 orElse: () => null,
@@ -57,9 +57,10 @@ class SignInForm extends ConsumerWidget {
             ),
             autocorrect: false,
             obscureText: true,
-            onChanged: (value) =>
-                ref.read(signInStateProvider.notifier).passwordChanged(value),
-            validator: (_) => signInState.password.value.fold(
+            onChanged: (value) => ref
+                .read(signInFormStateProvider.notifier)
+                .passwordChanged(value),
+            validator: (_) => signInFormState.password.value.fold(
               (f) => f.maybeMap(
                 shortPassword: (_) => 'Short Password',
                 orElse: () => null,
@@ -72,15 +73,17 @@ class SignInForm extends ConsumerWidget {
               Expanded(
                 child: TextButton(
                   child: const Text('Sign In'),
-                  onPressed: () =>
-                      ref.read(signInStateProvider.notifier).signInWithEmail(),
+                  onPressed: () => ref
+                      .read(signInFormStateProvider.notifier)
+                      .signInWithEmail(),
                 ),
               ),
               Expanded(
                 child: TextButton(
                   child: const Text('Sign Up'),
-                  onPressed: () =>
-                      ref.read(signInStateProvider.notifier).signUpWithEmail(),
+                  onPressed: () => ref
+                      .read(signInFormStateProvider.notifier)
+                      .signUpWithEmail(),
                 ),
               ),
             ],
@@ -88,9 +91,9 @@ class SignInForm extends ConsumerWidget {
           ElevatedButton(
             child: const Text('Sign In with Google'),
             onPressed: () =>
-                ref.read(signInStateProvider.notifier).signInWithGoogle(),
+                ref.read(signInFormStateProvider.notifier).signInWithGoogle(),
           ),
-          if (signInState.isSubmitting) ...[
+          if (signInFormState.isSubmitting) ...[
             const SizedBox(height: 8),
             const LinearProgressIndicator(),
           ]

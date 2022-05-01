@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'sign_in_state.dart';
+part of 'sign_in_form_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SignInState {
+mixin _$SignInFormState {
   Password get password => throw _privateConstructorUsedError;
   Email get email => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
@@ -24,15 +24,15 @@ mixin _$SignInState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SignInStateCopyWith<SignInState> get copyWith =>
+  $SignInFormStateCopyWith<SignInFormState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SignInStateCopyWith<$Res> {
-  factory $SignInStateCopyWith(
-          SignInState value, $Res Function(SignInState) then) =
-      _$SignInStateCopyWithImpl<$Res>;
+abstract class $SignInFormStateCopyWith<$Res> {
+  factory $SignInFormStateCopyWith(
+          SignInFormState value, $Res Function(SignInFormState) then) =
+      _$SignInFormStateCopyWithImpl<$Res>;
   $Res call(
       {Password password,
       Email email,
@@ -42,12 +42,13 @@ abstract class $SignInStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
-  _$SignInStateCopyWithImpl(this._value, this._then);
+class _$SignInFormStateCopyWithImpl<$Res>
+    implements $SignInFormStateCopyWith<$Res> {
+  _$SignInFormStateCopyWithImpl(this._value, this._then);
 
-  final SignInState _value;
+  final SignInFormState _value;
   // ignore: unused_field
-  final $Res Function(SignInState) _then;
+  final $Res Function(SignInFormState) _then;
 
   @override
   $Res call({
@@ -83,11 +84,11 @@ class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SignInStateCopyWith<$Res>
-    implements $SignInStateCopyWith<$Res> {
-  factory _$SignInStateCopyWith(
-          _SignInState value, $Res Function(_SignInState) then) =
-      __$SignInStateCopyWithImpl<$Res>;
+abstract class _$SignInFormStateCopyWith<$Res>
+    implements $SignInFormStateCopyWith<$Res> {
+  factory _$SignInFormStateCopyWith(
+          _SignInFormState value, $Res Function(_SignInFormState) then) =
+      __$SignInFormStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {Password password,
@@ -98,14 +99,15 @@ abstract class _$SignInStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
-    implements _$SignInStateCopyWith<$Res> {
-  __$SignInStateCopyWithImpl(
-      _SignInState _value, $Res Function(_SignInState) _then)
-      : super(_value, (v) => _then(v as _SignInState));
+class __$SignInFormStateCopyWithImpl<$Res>
+    extends _$SignInFormStateCopyWithImpl<$Res>
+    implements _$SignInFormStateCopyWith<$Res> {
+  __$SignInFormStateCopyWithImpl(
+      _SignInFormState _value, $Res Function(_SignInFormState) _then)
+      : super(_value, (v) => _then(v as _SignInFormState));
 
   @override
-  _SignInState get _value => super._value as _SignInState;
+  _SignInFormState get _value => super._value as _SignInFormState;
 
   @override
   $Res call({
@@ -115,7 +117,7 @@ class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
     Object? showErrorMessages = freezed,
     Object? authResponseOption = freezed,
   }) {
-    return _then(_SignInState(
+    return _then(_SignInFormState(
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -142,8 +144,8 @@ class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SignInState implements _SignInState {
-  const _$_SignInState(
+class _$_SignInFormState implements _SignInFormState {
+  const _$_SignInFormState(
       {required this.password,
       required this.email,
       required this.isSubmitting,
@@ -163,14 +165,14 @@ class _$_SignInState implements _SignInState {
 
   @override
   String toString() {
-    return 'SignInState(password: $password, email: $email, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, authResponseOption: $authResponseOption)';
+    return 'SignInFormState(password: $password, email: $email, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, authResponseOption: $authResponseOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SignInState &&
+            other is _SignInFormState &&
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality()
@@ -192,18 +194,18 @@ class _$_SignInState implements _SignInState {
 
   @JsonKey(ignore: true)
   @override
-  _$SignInStateCopyWith<_SignInState> get copyWith =>
-      __$SignInStateCopyWithImpl<_SignInState>(this, _$identity);
+  _$SignInFormStateCopyWith<_SignInFormState> get copyWith =>
+      __$SignInFormStateCopyWithImpl<_SignInFormState>(this, _$identity);
 }
 
-abstract class _SignInState implements SignInState {
-  const factory _SignInState(
+abstract class _SignInFormState implements SignInFormState {
+  const factory _SignInFormState(
       {required final Password password,
       required final Email email,
       required final bool isSubmitting,
       required final bool showErrorMessages,
       required final Option<Either<AuthFailure, Unit>>
-          authResponseOption}) = _$_SignInState;
+          authResponseOption}) = _$_SignInFormState;
 
   @override
   Password get password => throw _privateConstructorUsedError;
@@ -218,6 +220,6 @@ abstract class _SignInState implements SignInState {
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SignInStateCopyWith<_SignInState> get copyWith =>
+  _$SignInFormStateCopyWith<_SignInFormState> get copyWith =>
       throw _privateConstructorUsedError;
 }

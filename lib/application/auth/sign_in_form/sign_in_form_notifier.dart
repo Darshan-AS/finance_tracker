@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
-import 'package:finance_tracker/application/auth/sign_in_state.dart';
+import 'package:finance_tracker/application/auth/sign_in_form/sign_in_form_state.dart';
 import 'package:finance_tracker/domain/auth/auth_failure.dart';
 import 'package:finance_tracker/domain/auth/i_authenticator.dart';
 import 'package:finance_tracker/domain/auth/value_objects.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SignInNotifier extends StateNotifier<SignInState> {
+class SignInFormNotifier extends StateNotifier<SignInFormState> {
   final IAuthenticator _authenticator;
 
-  SignInNotifier(this._authenticator) : super(SignInState.initial());
+  SignInFormNotifier(this._authenticator) : super(SignInFormState.initial());
 
   void emailChanged(String emailString) {
     state = state.copyWith(
