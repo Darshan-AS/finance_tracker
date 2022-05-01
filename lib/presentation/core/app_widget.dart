@@ -1,14 +1,18 @@
-import 'package:finance_tracker/presentation/sign_in/sign_in_page.dart';
+import 'package:finance_tracker/presentation/routes/router_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AppWidget extends StatelessWidget {
+class AppWidget extends ConsumerWidget {
   const AppWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appRouter = ref.watch(routerProvider);
+
+    return MaterialApp.router(
       title: 'Flutter Demo',
-      home: const SignInPage(),
+      routerDelegate: appRouter.delegate(),
+      routeInformationParser: appRouter.defaultRouteParser(),
       theme: ThemeData.light().copyWith(
         primaryColor: Colors.green[800],
         floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -16,7 +20,9 @@ class AppWidget extends StatelessWidget {
         ),
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-        ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.blueAccent),
+        ),
+        colorScheme:
+            ColorScheme.fromSwatch().copyWith(secondary: Colors.blueAccent),
       ),
     );
   }
