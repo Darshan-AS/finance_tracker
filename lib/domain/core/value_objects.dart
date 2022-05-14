@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finance_tracker/domain/core/errors.dart';
 import 'package:finance_tracker/domain/core/failures.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -19,7 +20,8 @@ abstract class ValueObject<T> extends Equatable {
 
   bool isValid() => value.isRight();
 
-  T getOrThrow({e = UnexpectedValueError}) => value.fold((f) => throw UnexpectedValueError(f), id);
+  T getOrThrow({e = UnexpectedValueError}) =>
+      value.fold((f) => throw UnexpectedValueError(f), id);
 
   Either<ValueFailure<dynamic>, Unit> get getFailureOrUnit => value.fold(
         (f) => left(f),

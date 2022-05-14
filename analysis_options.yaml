@@ -33,6 +33,7 @@ analyzer:
     missing_return: error
     missing_required_param: error
     must_be_immutable: error
+    invalid_annotation_target: ignore
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
