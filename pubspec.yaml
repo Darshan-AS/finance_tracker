@@ -28,21 +28,21 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   auto_route: ^4.0.1
-  cupertino_icons: ^1.0.4
+  cupertino_icons: ^1.0.5
   dartz: ^0.10.1
   equatable: ^2.0.3
-  firebase_auth: ^3.3.18
-  firebase_core: ^1.17.0
+  firebase_auth: ^3.3.19
+  firebase_core: ^1.17.1
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.0.0-dev.5
   freezed_annotation: ^2.0.3
-  google_sign_in: ^5.3.1
+  google_sign_in: ^5.3.3
   uuid: ^3.0.6
 
 dev_dependencies:
   auto_route_generator: ^4.0.0
-  build_runner: ^2.1.10
+  build_runner: ^2.1.11
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter

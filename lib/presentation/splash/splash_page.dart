@@ -1,6 +1,6 @@
 import 'package:finance_tracker/application/auth/auth_state.dart';
 import 'package:finance_tracker/application/auth/auth_state_provider.dart';
-import 'package:finance_tracker/presentation/routes/router.gr.dart';
+import 'package:finance_tracker/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
