@@ -10,35 +10,37 @@ import 'package:uuid/uuid.dart';
 abstract class ValueObject<T> extends Equatable {
   const ValueObject();
 
-  Either<ValueFailure<T>, T> get value;
+  T get value;
 
   @override
-  List<Object> get props => [value];
+  List get props => [value];
 
   @override
   String toString() => 'Value: $value';
 
-  bool isValid() => value.isRight();
+  // bool isValid() => value.isRight();
 
-  T getOrThrow({e = UnexpectedValueError}) =>
-      value.fold((f) => throw UnexpectedValueError(f), id);
+  // static Either<ValueFailure<T>, ValueObject> create(T valueT);
 
-  Either<ValueFailure<dynamic>, Unit> get getFailureOrUnit => value.fold(
-        (f) => left(f),
-        (_) => right(unit),
-      );
+  // T getOrThrow({e = UnexpectedValueError}) =>
+  //     value.fold((f) => throw UnexpectedValueError(f), id);
+
+  // Either<ValueFailure<dynamic>, Unit> get getFailureOrUnit => value.fold(
+  //       (f) => left(f),
+  //       (_) => right(unit),
+  //     );
 }
 
 class UniqueId extends ValueObject<String> {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final String value;
 
-  factory UniqueId() {
-    return UniqueId._(right(const Uuid().v1()));
-  }
   const UniqueId._(this.value);
 
-  factory UniqueId.fromUniqueString(String uniqueId) {
-    return UniqueId._(right(uniqueId));
-  }
+  static Either<ValueFailure<String>, UniqueId> create() =>
+      right(UniqueId._(const Uuid().v1()));
+
+  static Either<ValueFailure<String>, UniqueId> fromUniqueString(
+          String stringUniqueId) =>
+      right(UniqueId._(stringUniqueId));
 }

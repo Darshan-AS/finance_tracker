@@ -12,14 +12,14 @@ class SignInFormNotifier extends StateNotifier<SignInFormState> {
 
   void emailChanged(String emailString) {
     state = state.copyWith(
-      email: Email(emailString),
+      email: Email.create(emailString),
       authResponseOption: none(),
     );
   }
 
   void passwordChanged(String passwordString) {
     state = state.copyWith(
-      password: Password(passwordString),
+      password: Password.create(passwordString),
       authResponseOption: none(),
     );
   }
@@ -54,16 +54,19 @@ class SignInFormNotifier extends StateNotifier<SignInFormState> {
         authAction,
   ) async {
     Either<AuthFailure, Unit>? authResponse;
+    // TODO: Find a better way instead of using nullable types
+    var email = state.email.toOption().toNullable();
+    var password = state.password.toOption().toNullable();
 
-    if (state.email.isValid() && state.password.isValid()) {
+    if (email != null && password != null) {
       state = state.copyWith(
         isSubmitting: true,
         authResponseOption: none(),
       );
 
       authResponse = await authAction(
-        email: state.email,
-        password: state.password,
+        email: email,
+        password: password,
       );
     }
 

@@ -5,18 +5,20 @@ import 'package:finance_tracker/domain/core/value_validators.dart';
 
 class Email extends ValueObject<String> {
   @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory Email(String email) => Email._(emailValidator(email));
+  final String value;
 
   const Email._(this.value);
+
+  static Either<ValueFailure<String>, Email> create(String stringEmail) =>
+      emailValidator(stringEmail).map((email) => Email._(email));
 }
 
 class Password extends ValueObject<String> {
   @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory Password(String password) => Password._(passwordValidator(password));
+  final String value;
 
   const Password._(this.value);
+
+  static Either<ValueFailure<String>, Password> create(String stringPassword) =>
+      passwordValidator(stringPassword).map((email) => Password._(email));
 }

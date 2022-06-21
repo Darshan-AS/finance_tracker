@@ -18,7 +18,8 @@ class FirebaseAuthenticator implements IAuthenticator {
 
   @override
   Future<Option<Agent>> getSignedInAgent() async {
-    return optionOf(_firebaseAuth.currentUser?.toDomain());
+    return optionOf(_firebaseAuth.currentUser)
+        .bind((user) => user.toDomain().toOption());
   }
 
   @override
@@ -26,8 +27,8 @@ class FirebaseAuthenticator implements IAuthenticator {
     required Email email,
     required Password password,
   }) async {
-    final emailString = email.getOrThrow();
-    final passwordString = password.getOrThrow();
+    final emailString = email.value;
+    final passwordString = password.value;
 
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
@@ -51,8 +52,8 @@ class FirebaseAuthenticator implements IAuthenticator {
     required Email email,
     required Password password,
   }) async {
-    final emailString = email.getOrThrow();
-    final passwordString = password.getOrThrow();
+    final emailString = email.value;
+    final passwordString = password.value;
 
     try {
       await _firebaseAuth.signInWithEmailAndPassword(

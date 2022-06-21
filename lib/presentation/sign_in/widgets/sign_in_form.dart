@@ -41,7 +41,7 @@ class SignInForm extends ConsumerWidget {
             keyboardType: TextInputType.emailAddress,
             onChanged: (value) =>
                 ref.read(signInFormStateProvider.notifier).emailChanged(value),
-            validator: (_) => signInFormState.email.value.fold(
+            validator: (_) => signInFormState.email.fold(
               (f) => f.maybeMap(
                 invalidEmail: (_) => 'Invalid Email',
                 orElse: () => null,
@@ -60,7 +60,7 @@ class SignInForm extends ConsumerWidget {
             onChanged: (value) => ref
                 .read(signInFormStateProvider.notifier)
                 .passwordChanged(value),
-            validator: (_) => signInFormState.password.value.fold(
+            validator: (_) => signInFormState.password.fold(
               (f) => f.maybeMap(
                 shortPassword: (_) => 'Short Password',
                 orElse: () => null,
