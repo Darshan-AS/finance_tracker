@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finance_tracker/domain/auth/auth_failure.dart';
 import 'package:finance_tracker/domain/auth/value_objects.dart';
 import 'package:finance_tracker/domain/core/failures.dart';
+import 'package:finance_tracker/domain/core/value_objects.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

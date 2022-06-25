@@ -3,6 +3,7 @@ import 'package:finance_tracker/application/auth/sign_in_form/sign_in_form_state
 import 'package:finance_tracker/domain/auth/auth_failure.dart';
 import 'package:finance_tracker/domain/auth/i_authenticator.dart';
 import 'package:finance_tracker/domain/auth/value_objects.dart';
+import 'package:finance_tracker/domain/core/value_objects.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SignInFormNotifier extends StateNotifier<SignInFormState> {

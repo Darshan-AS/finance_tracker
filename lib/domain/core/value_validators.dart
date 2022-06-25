@@ -9,8 +9,21 @@ Either<ValueFailure<String>, String> emailValidator(String email) {
       : left(ValueFailure.invalidEmail(invalidValue: email));
 }
 
-Either<ValueFailure<String>, String> passwordValidator(String password) {
-  return password.length >= 6
-      ? right(password)
-      : left(ValueFailure.shortPassword(invalidValue: password));
+Either<ValueFailure<T>, T> unsignedNumValidator<T>(T value) {
+  return value is num && !value.isNegative
+      ? right(value)
+      : left(ValueFailure.negativeValue(invalidValue: value));
+}
+
+Either<ValueFailure<String>, String> phoneValidator(String phone) {
+  const phoneRegex = r"^(?:[+0]9)?[0-9]{10,12}$";
+  return RegExp(phoneRegex).hasMatch(phone)
+      ? right(phone)
+      : left(ValueFailure.invalidPhone(invalidValue: phone));
+}
+
+Either<ValueFailure<String>, String> nonEmptyStringValidator(String value) {
+  return value.isNotEmpty
+      ? right(value)
+      : left(ValueFailure.emptyValue(invalidValue: value));
 }

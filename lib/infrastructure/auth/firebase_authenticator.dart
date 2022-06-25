@@ -3,6 +3,7 @@ import 'package:finance_tracker/domain/auth/agent.dart';
 import 'package:finance_tracker/domain/auth/auth_failure.dart';
 import 'package:finance_tracker/domain/auth/i_authenticator.dart';
 import 'package:finance_tracker/domain/auth/value_objects.dart';
+import 'package:finance_tracker/domain/core/value_objects.dart';
 import 'package:finance_tracker/infrastructure/auth/firebase_user_mapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
